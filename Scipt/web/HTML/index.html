@@ -1,0 +1,131 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delayed Alerts</title>
+    <style>
+      /* Styling for old-style select menu */
+      .select-menu {
+        width: 150px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Alert with Prompt and Confirmation</h1>
+    <p>
+      Click the buttons below to display an alert with prompt and confirmation.
+    </p>
+
+    <!-- Buttons that when clicked will display an alert with prompt and confirmation -->
+    <button onclick="showDelayedAlert('Message 1')">Show Alert 1</button>
+    <button onclick="showDelayedAlert('Message 2')">Show Alert 2</button>
+    <button onclick="showDelayedAlert('Message 3')">Show Alert 3</button>
+    <button onclick="showDelayedAlert('Message 4')">Show Alert 4</button>
+
+    <br /><br />
+
+    <!-- Dropdown menu with color options -->
+    <select
+      id="colorSelect"
+      onchange="changeTextStyle()"
+      onkeypress="handleKeyPress(event)"
+      class="select-menu"
+    >
+      <option value="style-red">Red</option>
+      <option value="style-blue">Blue</option>
+      <option value="style-green">Green</option>
+    </select>
+
+    <br /><br />
+
+    <!-- Select value dropdown menu -->
+    <select id="selectValue" class="select-menu">
+      <option value="value1">Value 1</option>
+      <option value="value2">Value 2</option>
+      <option value="value3">Value 3</option>
+    </select>
+
+    <br /><br />
+
+    <!-- Multi-select dropdown menu -->
+    <select id="multiSelect" class="select-menu" multiple>
+      <option value="option1">Option 1</option>
+      <option value="option2">Option 2</option>
+      <option value="option3">Option 3</option>
+    </select>
+
+    <br /><br />
+
+    <!-- Dropdown menu with many options -->
+    <select id="bigSelect" class="select-menu">
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+      <option value="6">Option 6</option>
+      <option value="7">Option 7</option>
+      <option value="8">Option 8</option>
+      <option value="9">Option 9</option>
+      <option value="10">Option 10</option>
+      <!-- Add more options as needed -->
+    </select>
+
+    <script>
+      // Function to display alert with prompt and confirmation after 10 seconds
+      function showDelayedAlert(message) {
+        // Delay 10 seconds
+        setTimeout(function () {
+          // Display prompt with the given message
+          if (message === "Message 1") {
+            alert(
+              "Alert 1: Displaying a regular alert with the value of the keyboard button pressed."
+            );
+          } else if (message === "Message 2") {
+            var confirmed = confirm(
+              "Alert 2: Displaying a confirmation (yes or no). Are you sure?"
+            );
+            if (confirmed) {
+              alert('You chose "Yes".');
+            } else {
+              alert('You chose "No".');
+            }
+          } else if (message === "Message 3") {
+            alert("Alert 3: Displaying an alert after 10 seconds.");
+          } else if (message === "Message 4") {
+            var userInput = prompt("Bot: What would you like to do?");
+            alert("Alert 4: You chose: " + userInput);
+          }
+        }, 10000); // Delay 10 seconds
+      }
+
+      // Function to change text style based on selection
+      function changeTextStyle() {
+        var selectBox = document.getElementById("colorSelect");
+        var selectedStyle = selectBox.options[selectBox.selectedIndex].value;
+        document.body.style.color = ""; // Reset text color
+        document.body.classList.remove(
+          "style-red",
+          "style-blue",
+          "style-green"
+        );
+        document.body.classList.add(selectedStyle);
+      }
+
+      // Function to handle key press event (Enter key)
+      function handleKeyPress(event) {
+        if (event.keyCode === 13) {
+          // Check if Enter key is pressed
+          changeTextStyle(); // Call changeTextStyle function
+        }
+      }
+    </script>
+  </body>
+</html>
